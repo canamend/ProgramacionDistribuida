@@ -15,7 +15,19 @@ public class Brazo implements Runnable{
     }
 
 
-    
+    public boolean tomarPieza() throws InterruptedException {
+        try{
+            System.out.println("Intenta tomar pieza");
+            if(!cont.estaOcupado()){
+              cont.descargarUnaPieza();
+            }
+        } finally {
+            cont.liberar();
+        }
+        
+        return true;
+    }
+
     @Override
     public void run() {
         while (true) {
