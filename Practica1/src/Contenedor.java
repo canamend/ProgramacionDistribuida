@@ -1,33 +1,46 @@
 package ProgramacionDistribuida.Practica1.src;
 
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.locks.ReentrantLock;
-
-public class Contenedor {
-    int id;
-    int numPiezas;
-    private ReentrantLock lock;
-
-
-    public Contenedor(int numPiezas){
-        this.numPiezas = numPiezas;
-        this.lock = new ReentrantLock();
+/*
+    El constructor de la clase debe permitir asignar
+    un identificador único al contenedor y configurar la cantidad de piezas que
+    contiene inicialmente. Además, debe ofrecer como parte de su interfaz el método
+    descargarUnaPieza(). Este método deberá decrementar en una unidad la cantidad
+    de piezas existentes en el contenedor.
+*/
+public class Contenedor{
+    private int ID;
+    private int cantPiezas = 0;
+    
+    public Contenedor(){
+        this.cantPiezas = 50;
     }
-
-
-    public boolean descargarUnaPieza() throws InterruptedException {
-        this.numPiezas--;
-        return lock.tryLock(250, TimeUnit.MILLISECONDS);
+    
+    public Contenedor(int cantPiezas){
+        this.cantPiezas = cantPiezas;
     }
-
-    public boolean estaOcupado() {
-        return lock.isHeldByCurrentThread();
+    
+    public Contenedor(int ID, int cantPiezas){
+        this.ID = ID;
+        this.cantPiezas = cantPiezas;
     }
-
-    public void liberar() throws InterruptedException {
-        if (estaOcupado()) {
-            lock.unlock();
-        }
+    
+    public void setPiezas(int cantPiezas){
+        this.cantPiezas = cantPiezas;
     }
-
+    
+    public void setId(int ID){
+        this.ID = ID;
+    }
+    
+    public int getCantPiezas(){
+        return this.cantPiezas;
+    }
+    
+    public synchronized void descargarUnaPieza(){
+        this.cantPiezas -= 1;
+    }
+    
+    public void descargarPiezas(int n){
+        this.cantPiezas -= n;
+    }
 }
