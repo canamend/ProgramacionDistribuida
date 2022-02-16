@@ -39,6 +39,10 @@ public class Brazo implements Runnable{
                 this.contenedor1.descargarUnaPieza();
                 System.out.println("Brazo "+this.iD+": extrajo una pieza del contenedor A");
                 this.numPiezasExtraidas += 1;
+                if(this.contenedor1.getCantPiezas()<=0){
+                    System.out.println("No hay piezas restantes");
+                    break;
+                }
                 try{
                     Thread.sleep(50);
                 }catch(InterruptedException e){
@@ -60,6 +64,10 @@ public class Brazo implements Runnable{
                 this.numPiezasExtraidas += 1;
                 this.contPiezas +=1;
                 System.out.println("El Brazo "+this.iD+" ha montado su producto "+this.contPiezas+" de "+this.numPiezas/2);
+                if(this.contenedor2.getCantPiezas()<=0){
+                    System.out.println("No hay piezas restantes");
+                    break;
+                }
                 try{
                     Thread.sleep(50);
                 }catch(InterruptedException e){
@@ -78,8 +86,14 @@ public class Brazo implements Runnable{
                 }
                 //Acceso a la memoria crítica
                 this.contenedor2.descargarUnaPieza();
+                
+                
                 System.out.println("Brazo "+this.iD+": extrajo una pieza del contenedor B");
                 this.numPiezasExtraidas += 1;
+                if(this.contenedor2.getCantPiezas()<=0){
+                    System.out.println("No hay piezas restantes");
+                    break;
+                }
                 try{
                     Thread.sleep(50);
                 }catch(InterruptedException e){
@@ -102,6 +116,10 @@ public class Brazo implements Runnable{
                 this.contPiezas += 1;
                 System.out.println("El Brazo "+this.iD+" ha montado su producto "+this.contPiezas+" de "+this.numPiezas/2);
                 
+                if(this.contenedor1.getCantPiezas()<=0){
+                    System.out.println("No hay piezas restantes");
+                    break;
+                }
                 try{
                     Thread.sleep(50);
                 }catch(InterruptedException e){

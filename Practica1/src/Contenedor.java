@@ -1,15 +1,9 @@
 package ProgramacionDistribuida.Practica1.src;
 
-/*
-    El constructor de la clase debe permitir asignar
-    un identificador único al contenedor y configurar la cantidad de piezas que
-    contiene inicialmente. Además, debe ofrecer como parte de su interfaz el método
-    descargarUnaPieza(). Este método deberá decrementar en una unidad la cantidad
-    de piezas existentes en el contenedor.
-*/
 public class Contenedor{
     private int ID;
     private int cantPiezas = 0;
+    private int cantPiezasInicial;
     
     public Contenedor(){
         this.cantPiezas = 50;
@@ -37,10 +31,16 @@ public class Contenedor{
     }
     
     public synchronized void descargarUnaPieza(){
-        this.cantPiezas -= 1;
+        if(this.cantPiezas>0){
+            this.cantPiezas -= 1;
+        }
     }
     
     public void descargarPiezas(int n){
         this.cantPiezas -= n;
+    }
+    
+    public int numPiezasExtraidas(){
+        return this.cantPiezasInicial-this.cantPiezas;
     }
 }

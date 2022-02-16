@@ -9,24 +9,22 @@ public class Brazo extends Thread{
         this.numPiezas = numPiezas;
         this.contenedor=cont;
     }
-    /*Aquí intenté usar el método synchronized para ver su funcionamiento, sin embargo no vi un 
-    cambio en su funcionamiento, llama en un loop al método extraer para crear la condición
-    de competencia.*/
     public void run(){
-         while(this.numPiezas>0){
+         while(!(this.contenedor.getCantPiezas()==0)){
             this.contenedor.descargarUnaPieza();
             //Thread.;
             System.out.print("Brazo "+this.iD+": extrajo una pieza, restan "+contenedor.getCantPiezas()+" Piezas\n");
             this.numPiezas -= 1;
             try{
-                Thread.sleep(500);
+                Thread.sleep(1000);
             }catch(InterruptedException e){
                 System.out.println("Proceso interrumpido");
             }
-        } 
+        }
+        System.out.print("Se ha detenido la ejecución, contenedor vacío\n"); 
     }
     public void extraer(){
-        if(this.contenedor.getCantPiezas()>0){
+        if(!(this.contenedor.getCantPiezas()==0)){
             this.contenedor.descargarUnaPieza();
             System.out.print("Brazo "+this.iD+": extrajo una pieza, restan "+contenedor.getCantPiezas()+" Piezas\n");
             try{
@@ -34,9 +32,9 @@ public class Brazo extends Thread{
             }catch(InterruptedException e){
                 System.out.println("Brazo "+this.iD+" interrumpido");
             }
-       }else{
+        }else{
            System.out.println("Brazo "+this.iD+": No hay piezas por extraer");
-       }
+        }
         
     }
        

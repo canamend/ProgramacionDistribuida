@@ -26,7 +26,7 @@ public class Brazo implements Runnable{
             while(Sistema.banderas[Sistema.turno] && Sistema.turno!=this.iD){
                 //Proceso dormido
                 try{
-                    Thread.sleep(500);
+                    Thread.sleep(50);
                 }catch(InterruptedException e){
                     System.out.println("Proceso interrumpido");
                 }
@@ -35,6 +35,10 @@ public class Brazo implements Runnable{
             this.contenedor.descargarUnaPieza();
             System.out.print("Brazo "+this.iD+": extrajo una pieza, se han extraido "+this.contenedor.numPiezasExtraidas()+" Piezas\n");
             this.numPiezasExtraidas += 1;
+            if(this.contenedor.getCantPiezas()<=0){
+                System.out.println("No hay piezas restantes");
+                break;
+            }
             try{
                 Thread.sleep(50);
             }catch(InterruptedException e){
